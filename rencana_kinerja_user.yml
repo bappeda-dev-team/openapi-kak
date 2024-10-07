@@ -127,6 +127,20 @@ paths:
                   text:
                     type: string
                     examples: ["Rencana Kinerja dihapus"]
+  "/rencana_kinerja/{rencana_kinerja_id}/pegawai/{pegawai_id}/input_rincian_kak":
+    get:
+      summary: rekin - input rincian
+      description: input rincian rencana kinerja
+      parameters:
+        - $ref: "#/components/parameters/pegawaiId"
+        - $ref: "#/components/parameters/rencanaKinerjaId"
+      responses:
+        "200":
+          description: halaman input rincian rencana kinerja pegawai
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RencanaKinerja"
 components:
   schemas:
     RencanaKinerja:
