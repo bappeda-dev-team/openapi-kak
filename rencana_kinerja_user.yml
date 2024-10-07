@@ -54,36 +54,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              description: list rencana kinerja user
-              properties:
-                id:
-                  type: string
-                  examples:
-                    - SAS-PEG-3598
-                rencana_kinerja:
-                  type: string
-                  examples:
-                    - Contoh Rencana Kinerja
-                tahun:
-                  type: string
-                  examples:
-                    - "2024"
-                    - 2024_p
-                status_rencana_kinerja:
-                  type: array
-                  items:
-                    type: string
-                  examples:
-                    - DRAFT
-                catatan:
-                  type: string
-                  examples:
-                    - "-"
-                indikators:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Indikator"
+              $ref: "#/components/schemas/RencanaKinerja"
 components:
   schemas:
     RencanaKinerja:
@@ -122,10 +93,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Indikator"
-        actions:
-          type: array
-          items:
-            $ref: "#/components/schemas/Action"
     Indikator:
       type: object
       properties:
