@@ -140,7 +140,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/RencanaKinerja"
+                $ref: "#/components/schemas/RincianRencanaKinerjaKak"
 components:
   schemas:
     RencanaKinerja:
@@ -159,7 +159,7 @@ components:
           type: string
           examples:
             - "2024"
-            - 2024_p
+            - "2024_p"
         status_rencana_kinerja:
           type: array
           items:
@@ -227,6 +227,315 @@ components:
             - GET
             - GET
             - DELETE
+    RincianRencanaKinerjaKak:
+      type: object
+      description: kebutuhan data input kak rencana kinerja
+      properties:
+        rencana_kinerja:
+          $ref: "#/components/schemas/RencanaKinerja"
+        rencana_aksis:
+          $ref: "#/components/schemas/RencanaAksis"
+        usulans:
+          $ref: "#/components/schemas/Usulans"
+        subkegiatan:
+          $ref: "#/components/schemas/SubKegiatan"
+        dasar_hukums:
+          $ref: "#/components/schemas/DasarHukums"
+        gambaran_umums:
+          $ref: "#/components/schemas/GambaranUmums"
+        inovasis:
+          $ref: "#/components/schemas/Inovasis"
+    Usulans:
+      type: object
+      properties:
+        usulan_pilihan:
+          type: object
+          properties:
+            pilihan:
+              type: array
+              items:
+                $ref: "#/components/schemas/UsulanPilihan"
+            actions:
+              type: array
+              items:
+                $ref: "#/components/schemas/Action"
+        usulan_terpilih:
+          type: array
+          items:
+            $ref: "#/components/schemas/UsulanTerpilih"
+
+    UsulanPilihan:
+      type: object
+      properties:
+        id:
+          type: string
+          examples: ["USU-MUS-1112"]
+        jenis:
+          type: string
+          examples: ["Musrenbang"]
+        usulan:
+          type: string
+          examples: ["Perbaikan Saluran Air Jalan X"]
+        tahun:
+          type: string
+          examples: ["2024"]
+
+    UsulanTerpilih:
+      type: object
+      properties:
+        id:
+          type: string
+          examples: ["USU-MUS-3343"]
+        jenis:
+          type: string
+          examples: ["Musrenbang"]
+        usulan:
+          type: string
+          examples: ["Perbaikan JALAN"]
+        alamat:
+          type: string
+          examples: ["JALAN XX"]
+        permasalahan:
+          type: string
+          examples: ["JALAN BERLUBANG"]
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Action"
+
+    SubKegiatan:
+      type: object
+      properties:
+        subkegiatan_pilihan:
+          type: object
+          properties:
+            pilihan_uri:
+              type: string
+              examples:
+                [
+                  "https://kertaskerja.app/perangkat_daerahs/PD-335/list_subkegiatan",
+                ]
+            pilihan:
+              type: array
+              items:
+                $ref: "#/components/schemas/SubKegiatanPilihan"
+        subkegiatan_terpilih:
+          $ref: "#/components/schemas/SubKegiatanTerpilih"
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Action"
+
+    SubKegiatanPilihan:
+      type: object
+      properties:
+        id:
+          type: string
+          examples: ["SUB-27783"]
+        nama_subkegiatan:
+          type: string
+          examples: ["PENYUSUNAN XX"]
+        tahun:
+          type: string
+          examples: ["2024"]
+        perangkat_daerah:
+          type: string
+          examples: ["BAPPEDA"]
+
+    SubKegiatanTerpilih:
+      type: object
+      properties:
+        id:
+          type: string
+          examples: ["SUB-28839"]
+        nama_subkegiatan:
+          type: string
+          examples: ["Penyusunan Dokumen Perencanaan Perangkat Daerah"]
+        indikator_subkegiatan:
+          type: array
+          items:
+            $ref: "#/components/schemas/IndikatorSubKegiatan"
+        pagu:
+          type: array
+          items:
+            $ref: "#/components/schemas/Pagu"
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Action"
+
+    IndikatorSubKegiatan:
+      type: object
+      properties:
+        id:
+          type: string
+          examples: ["IND-SUB-22"]
+        indikator:
+          type: string
+          examples: ["Jumlah Dokumen Perencanaan Perangkat Daerah"]
+    Pagu:
+      type: object
+      properties:
+        jenis:
+          type: string
+          examples: ["ranwal"]
+        tahun:
+          type: string
+          examples: ["2024"]
+        pagu_anggaran:
+          type: string
+          examples: ["Rp. 66,979,200"]
+    DasarHukums:
+      type: object
+      properties:
+        dasar_hukum:
+          type: array
+          items:
+            $ref: "#/components/schemas/DasarHukum"
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Action"
+
+    DasarHukum:
+      type: object
+      properties:
+        id:
+          type: string
+          examples: ["DASHU-SAS-3305"]
+        urutan:
+          type: integer
+          examples: [1]
+        peraturan_terkait:
+          type: string
+          examples: ["Peraturan Mendagri 86 Tahun 2017"]
+        uraian:
+          type: string
+          examples: ["Bahwa selama beberapa tahun terakhir"]
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Action"
+
+    GambaranUmums:
+      type: object
+      properties:
+        gambaran_umum:
+          type: array
+          items:
+            $ref: "#/components/schemas/GambaranUmum"
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Action"
+
+    GambaranUmum:
+      type: object
+      properties:
+        id:
+          type: string
+          examples: ["GAMUM-SAS-3304"]
+        urutan:
+          type: integer
+          examples: [1]
+        gambaran_umum:
+          type: string
+          examples:
+            [
+              "Pada Tahun 2024, setiap Perangkat Daerah di Lingkungan Pemerintah Kota Madiun mulai menyusun Rencana Strategis",
+            ]
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Action"
+
+    Inovasis:
+      type: object
+      properties:
+        inovasi:
+          type: array
+          items:
+            $ref: "#/components/schemas/Inovasi"
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Action"
+
+    Inovasi:
+      type: object
+      properties:
+        id:
+          type: string
+          examples: ["INOV-SAS-2304"]
+        judul_inovasi:
+          type: string
+          examples: ["EKAK > SIARAN"]
+        jenis_inovasi:
+          type: string
+          examples: ["Baru"]
+        gambaran_nilai_kebaruan:
+          type: string
+          examples:
+            [
+              "Inovasi e KAK merupakan inovasi terintegrasi yang menyediakan data dan informasi",
+            ]
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Action"
+    RencanaAksis:
+      type: object
+      properties:
+        renaksi:
+          type: array
+          items:
+            $ref: "#/components/schemas/Renaksi"
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Action"
+
+    Renaksi:
+      type: object
+      properties:
+        id:
+          type: string
+          examples: ["RA-SAS-3398"]
+        urutan:
+          type: integer
+          examples: [1]
+        aksi:
+          type: string
+          examples: ["Rapat Koordinasi"]
+        catatan:
+          type: string
+          examples: ["-"]
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Action"
+        pelaksanaan:
+          type: array
+          items:
+            $ref: "#/components/schemas/Pelaksanaan"
+
+    Pelaksanaan:
+      type: object
+      properties:
+        id:
+          type: string
+          examples: ["PEL-1145"]
+        bobot:
+          type: integer
+          examples: [1]
+        bulan:
+          type: integer
+          examples: [1]
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Action"
+
   parameters:
     tahun:
       name: tahun
