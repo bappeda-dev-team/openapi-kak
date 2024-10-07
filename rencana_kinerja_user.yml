@@ -5,13 +5,13 @@ info:
   version: 0.0.1
   contact:
     name: Ryan B
-    url: https://github.com/RyanB1303
+    url: "https://github.com/RyanB1303"
     email: ryanb1303@gmail.com
   license:
     name: Apache 2.0
-    url: https://www.apache.org/licenses/LICENSE-2.0
+    url: "https://www.apache.org/licenses/LICENSE-2.0"
 servers:
-  - url: https://{environment}.kertaskerja.cc/{basePath}
+  - url: "https://{environment}.kertaskerja.cc/{basePath}"
     description: KertasKerja API Server
     variables:
       environment:
@@ -28,15 +28,15 @@ servers:
           - api/v1
           - api/v2
 paths:
-  /rencana_kinerja/pegawai/{pegawai_id}:
+  "/rencana_kinerja/pegawai/{pegawai_id}":
     get:
       summary: list rencana kinerja pegawai
-      description: list rencana kinerja pegawai pada tahun x
+      description: list rencana kinerja pegawai pada tahun terpilih
       parameters:
         - $ref: "#/components/parameters/pegawaiId"
         - $ref: "#/components/parameters/tahun"
       responses:
-        200:
+        "200":
           description: get list rencana kinerja user
           content:
             application/json:
@@ -59,19 +59,23 @@ paths:
               properties:
                 id:
                   type: string
-                  examples: ["SAS-PEG-3598"]
+                  examples:
+                    - SAS-PEG-3598
                 rencana_kinerja:
                   type: string
-                  examples: ["Contoh Rencana Kinerja"]
+                  examples:
+                    - Contoh Rencana Kinerja
                 tahun:
                   type: string
-                  examples: ["2024", "2024_p"]
+                  examples:
+                    - "2024"
+                    - 2024_p
                 status_rencana_kinerja:
                   type: array
                   items:
                     type: string
                   examples:
-                    - "DRAFT"
+                    - DRAFT
                 catatan:
                   type: string
                   examples:
@@ -80,7 +84,6 @@ paths:
                   type: array
                   items:
                     $ref: "#/components/schemas/Indikator"
-
 components:
   schemas:
     RencanaKinerja:
@@ -89,20 +92,24 @@ components:
       properties:
         id:
           type: string
-          examples: ["SAS-PEG-3598"]
+          examples:
+            - SAS-PEG-3598
         rencana_kinerja:
           type: string
-          examples: ["Contoh Rencana Kinerja"]
+          examples:
+            - Contoh Rencana Kinerja
         tahun:
           type: string
-          examples: ["2024", "2024_p"]
+          examples:
+            - "2024"
+            - 2024_p
         status_rencana_kinerja:
           type: array
           items:
             type: string
           examples:
-            - "SIAP DITARIK SKP"
-            - "MANRISK SIAP DIVERIFIKASI"
+            - SIAP DITARIK SKP
+            - MANRISK SIAP DIVERIFIKASI
         catatan:
           type: string
           examples:
@@ -110,7 +117,7 @@ components:
         pegawai_id:
           type: string
           examples:
-            - "PEG-2021"
+            - PEG-2021
         indikators:
           type: array
           items:
@@ -124,44 +131,49 @@ components:
       properties:
         id:
           type: string
-          examples: ["IND-SAS-1234", "IND-SAS-2222"]
+          examples:
+            - IND-SAS-1234
+            - IND-SAS-2222
         sasaran_id:
           type: string
           examples:
-            - "SAS-PEG-3589"
+            - SAS-PEG-3589
         indikator:
           type: string
-          examples: ["jumlah dokumen perencanaan", "test a"]
+          examples:
+            - jumlah dokumen perencanaan
+            - test a
         target:
           type: integer
-          examples: [6, 7]
+          examples:
+            - 6
+            - 7
         satuan:
           type: string
-          examples: ["dokumen", "gambar"]
+          examples:
+            - dokumen
+            - gambar
     Action:
       type: object
       properties:
         name:
           type: string
-          examples: [
-          "InputRincianKak",
-          "Edit",
-          "Hapus"
-          ]
+          examples:
+            - InputRincianKak
+            - Edit
+            - Hapus
         uri:
           type: string
-          examples: [
-          "/rencana_kinerja/{sasaran_id}/rincian_kak",
-          "/rencana_kinerja/{sasaran_id}/edit",
-          "/rencana_kinerja/{sasaran_id}/hapus",
-          ]
+          examples:
+            - "/rencana_kinerja/{sasaran_id}/rincian_kak"
+            - "/rencana_kinerja/{sasaran_id}/edit"
+            - "/rencana_kinerja/{sasaran_id}/hapus"
         method:
           type: string
-          examples: [
-          "GET",
-          "GET",
-          "DELETE"
-          ]
+          examples:
+            - GET
+            - GET
+            - DELETE
   parameters:
     tahun:
       name: tahun
@@ -176,6 +188,6 @@ components:
       description: id pegawai
       required: true
       in: path
-      example: "PEG-2021"
+      example: PEG-2021
       schema:
         type: string
