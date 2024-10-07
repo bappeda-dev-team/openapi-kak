@@ -30,7 +30,7 @@ servers:
 paths:
   "/rencana_kinerja/pegawai/{pegawai_id}":
     get:
-      summary: list rencana kinerja pegawai
+      summary: rekin - index
       description: list rencana kinerja pegawai pada tahun terpilih
       parameters:
         - $ref: "#/components/parameters/pegawaiId"
@@ -43,8 +43,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RencanaKinerja"
     post:
-      summary: simpan rencana kinerja pegawai
-      description: simpan rencana kinerja pegawai di form
+      summary: rekin - create
+      description: simpan rencana kinerja pegawai baru
       parameters:
         - $ref: "#/components/parameters/pegawaiId"
         - $ref: "#/components/parameters/tahun"
@@ -55,6 +55,78 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/RencanaKinerja"
+  "/rencana_kinerja/pegawai/{pegawai_id}/new":
+    get:
+      summary: rekin -  new
+      description: halaman input rencana kinerja pegawai baru
+      parameters:
+        - $ref: "#/components/parameters/pegawaiId"
+      responses:
+        "200":
+          description: halaman input rencana kinerja pegawai
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RencanaKinerja"
+  "/rencana_kinerja/{rencana_kinerja_id}/pegawai/{pegawai_id}/edit":
+    get:
+      summary: rekin - edit
+      description: halaman edit rencana kinerja pegawai
+      parameters:
+        - $ref: "#/components/parameters/pegawaiId"
+        - $ref: "#/components/parameters/rencanaKinerjaId"
+      responses:
+        "200":
+          description: halaman edit rencana kinerja pegawai
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RencanaKinerja"
+    patch:
+      summary: rekin - update
+      description: update rencana kinerja pegawai
+      parameters:
+        - $ref: "#/components/parameters/pegawaiId"
+        - $ref: "#/components/parameters/rencanaKinerjaId"
+      responses:
+        "200":
+          description: update rencana kinerja pegawai
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RencanaKinerja"
+  "/rencana_kinerja/{rencana_kinerja_id}/pegawai/{pegawai_id}":
+    get:
+      summary: rekin - show
+      description: show rencana kinerja
+      parameters:
+        - $ref: "#/components/parameters/pegawaiId"
+        - $ref: "#/components/parameters/rencanaKinerjaId"
+      responses:
+        "200":
+          description: halaman show rencana kinerja pegawai
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RencanaKinerja"
+    delete:
+      summary: rekin - delete
+      description: hapus rencana kinerja
+      parameters:
+        - $ref: "#/components/parameters/pegawaiId"
+        - $ref: "#/components/parameters/rencanaKinerjaId"
+      responses:
+        "200":
+          description: hapus rencana kinerja pegawai
+          content:
+            application/json:
+              schema:
+                type: object
+                description: keterangan hapus sukses
+                properties:
+                  text:
+                    type: string
+                    examples: ["Rencana Kinerja dihapus"]
 components:
   schemas:
     RencanaKinerja:
@@ -156,5 +228,13 @@ components:
       required: true
       in: path
       example: PEG-2021
+      schema:
+        type: string
+    rencanaKinerjaId:
+      name: rencana_kinerja_id
+      description: id rencana kinerja
+      required: true
+      in: path
+      example: SAS-PEG-3598
       schema:
         type: string
